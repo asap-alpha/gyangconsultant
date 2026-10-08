@@ -59,8 +59,8 @@ export function buildMailto(e: Enquiry, to: string): string {
 export type SubmitResult = 'sent' | 'mail-client' | 'unavailable'
 
 /**
- * Delivers an enquiry. Uses VITE_CONTACT_ENDPOINT when configured, otherwise
- * falls back to opening the visitor's email client addressed to the company.
+ * Delivers an enquiry. Uses VITE_CONTACT_ENDPOINT when configured; if that is unset or
+ * fails, falls back to opening the visitor's email client addressed to the company.
  */
 export async function submitEnquiry(
   e: Enquiry,
@@ -74,8 +74,9 @@ export async function submitEnquiry(
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({ ...payload, _subject: `Website enquiry — ${company.name}` }),
     })
-    if (!res.ok) throw new Error(`Enquiry endpoint responded ${res.status}`)
-    return 'sent'
+    if (res.ok) return 'sent'
+    // Don't lose the enquiry if the server can't send it: hand over to the mail client
+    if (!contact.email) throw new Error(`Enquiry endpoint responded ${res.status}`)
   }
   if (contact.email) {
     window.location.href = buildMailto(e, contact.email)

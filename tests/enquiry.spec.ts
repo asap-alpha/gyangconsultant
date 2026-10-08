@@ -63,9 +63,16 @@ describe('submitEnquiry', () => {
     expect(body.email).toBe('ama@example.com')
   })
 
-  it('throws when the endpoint fails', async () => {
+  it('throws when the endpoint fails and no email is configured', async () => {
+    vi.spyOn(contact, 'email', 'get').mockReturnValue(null)
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response('', { status: 500 }))
     await expect(submitEnquiry(valid(), 'https://x.test')).rejects.toThrow()
+  })
+
+  it('falls back to the mail client when the endpoint fails', async () => {
+    vi.spyOn(contact, 'email', 'get').mockReturnValue('info@example.com')
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response('', { status: 502 }))
+    expect(await submitEnquiry(valid(), 'https://x.test')).toBe('mail-client')
   })
 
   it('falls back to the mail client when only an email is configured', async () => {
