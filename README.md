@@ -58,6 +58,16 @@ All copy lives in `src/content/`. There's no need to touch components to change 
 
 **Hostinger (Apache/LiteSpeed)**: `public/.htaccess` already carries the headers, HTTPS redirect, clean URLs and 404 page. Build, then upload the *contents* of `dist/` (including the hidden `.htaccess`) into `public_html/`.
 
+**Automatic deploys**: `.github/workflows/deploy.yml` lints, tests and builds every push and pull request, and on `main` uploads the changed files to Hostinger over FTPS. It needs these repository secrets (Settings → Secrets and variables → Actions), taken from hPanel → Files → FTP Accounts:
+
+| Secret | Value |
+| --- | --- |
+| `FTP_SERVER` | FTP hostname/IP, e.g. `ftp.gyangcorporateconsult.com` |
+| `FTP_USERNAME` | FTP username, e.g. `u668670137` |
+| `FTP_PASSWORD` | FTP password |
+
+Optional repository variables: `FTP_SERVER_DIR` (default `public_html/`, relative to the FTP account's root) and `VITE_CONTACT_ENDPOINT`.
+
 ## Project structure
 
 ```
