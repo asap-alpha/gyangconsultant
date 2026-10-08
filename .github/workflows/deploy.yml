@@ -60,4 +60,4 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           local-dir: ./dist/
-          server-dir: ${{ vars.FTP_SERVER_DIR || './' }} # Hostinger FTP logs in inside public_html
+          server-dir: ./ # Hostinger's FTP login already opens inside public_html

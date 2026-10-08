@@ -66,7 +66,7 @@ All copy lives in `src/content/`. There's no need to touch components to change 
 | `FTP_USERNAME` | FTP username, e.g. `u668670137` |
 | `FTP_PASSWORD` | FTP password |
 
-Optional repository variables: `FTP_SERVER_DIR` (default `./`, since Hostinger's FTP login already opens inside `public_html`) and `VITE_CONTACT_ENDPOINT`.
+Files are uploaded to the FTP root, which on Hostinger is already `public_html`. Optional repository variable: `VITE_CONTACT_ENDPOINT`.
 
 ## Project structure
 
