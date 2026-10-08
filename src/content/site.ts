@@ -34,8 +34,8 @@ export const company = {
 
 export const contact: ContactDetails = {
   email: 'info@gyangcorporateconsult.com',
-  phones: [],
-  address: null,
+  phones: ['+233 24 426 3774'],
+  address: 'Plot No. 206, Fuo Extension Residential, Tamale',
 }
 
 export const regions = [

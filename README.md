@@ -66,7 +66,7 @@ All copy lives in `src/content/`. There's no need to touch components to change 
 | `FTP_USERNAME` | FTP username, e.g. `u668670137` |
 | `FTP_PASSWORD` | FTP password |
 
-Files are uploaded to `public_html/` inside the FTP login folder (hardcoded in the workflow). Optional repository variable: `VITE_CONTACT_ENDPOINT`.
+Files are uploaded to the FTP account's root, so in hPanel that account's directory must be the website root (`public_html` itself, not a folder inside it). Optional repository variable: `VITE_CONTACT_ENDPOINT`.
 
 ## Project structure
 
