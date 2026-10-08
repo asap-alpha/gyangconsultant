@@ -60,4 +60,4 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           local-dir: ./dist/
-          server-dir: ./ # Hostinger's FTP login already opens inside public_html
+          server-dir: public_html/ # relative to the FTP login folder (the one holding DO_NOT_UPLOAD_HERE)
